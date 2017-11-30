@@ -1,4 +1,4 @@
-@import time
+import time
 import  random
 from slackclient import SlackClient
 
@@ -16,7 +16,7 @@ def parse(slack_rtm_output):
             if output and 'text' in output and '@' in output['text']:
                 return True, output['channel'], filter(lambda x:'@'in x, output['text'].split(' '))
 
-    return False, None
+    return False, None, None
 
 
 def handle(channel, list):
@@ -28,8 +28,8 @@ if __name__ == "__main__":
     if slack_client.rtm_connect():
         print("StarterBot connected and running!")
         while True:
-            has_sora, channel, list = parse(slack_client.rtm_read())
-            if has_sora:
+            has_tag, channel, list = parse(slack_client.rtm_read())
+            if has_tag:
                 handle(channel, list)
 
             time.sleep(READ_DELAY)
