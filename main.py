@@ -1,4 +1,4 @@
-import time
+@import time
 import  random
 from slackclient import SlackClient
 
@@ -13,7 +13,7 @@ def parse(slack_rtm_output):
     output_list = slack_rtm_output
     if output_list and len(output_list) > 0:
         for output in output_list:
-            if output and 'text' in output and @ in output['text']:
+            if output and 'text' in output and '@' in output['text']:
                 return True, output['channel'], filter(lambda x:'@'in x, output['text'].split(' '))
 
     return False, None
