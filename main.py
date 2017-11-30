@@ -13,7 +13,7 @@ def parse(slack_rtm_output):
     output_list = slack_rtm_output
     if output_list and len(output_list) > 0:
         for output in output_list:
-            if output and 'text' in output and '@' in output['text']:
+            if output and 'text' in output and '@' in output['text'] and ' 노티봇' not in output['text']:
                 return True, output['channel'], filter(lambda x:'@'in x, output['text'].split(' '))
 
     return False, None, None
@@ -21,7 +21,7 @@ def parse(slack_rtm_output):
 
 def handle(channel, list):
 	for item in list:
-		slack_client.api_call("chat.postMessage", link_names=1, channel=channel, text=item, as_user=True)
+		slack_client.api_call("chat.postMessage", link_names=1, channel=channel, text=item + ' 노티봇', as_user=True)
 
 
 if __name__ == "__main__":
