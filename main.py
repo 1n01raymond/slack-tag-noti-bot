@@ -19,7 +19,7 @@ def parse(slack_rtm_output):
     return False, None, None
 
 
-def get_rtm()
+def get_rtm():
 	output_list = slack_client.rtm_read()
 	if output_list and len(output_list) > 0:
         handle(output['channel'], output_list)
