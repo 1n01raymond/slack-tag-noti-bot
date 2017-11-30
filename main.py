@@ -19,6 +19,12 @@ def parse(slack_rtm_output):
     return False, None, None
 
 
+def get_rtm()
+	output_list = slack_client.rtm_read()
+	if output_list and len(output_list) > 0:
+        handle(output['channel'], output_list)
+				
+	
 def handle(channel, list):
 	for item in list:
 		slack_client.api_call("chat.postMessage", link_names=1, channel=channel, text=item + ' 노티봇', as_user=True)
@@ -31,7 +37,9 @@ if __name__ == "__main__":
             has_tag, channel, list = parse(slack_client.rtm_read())
             if has_tag:
                 handle(channel, list)
-
-            time.sleep(READ_DELAY)
+			
+			get_rtm()
+				
+            time.sleep(10)
     else:
         print("Connection failed. Invalid Slack token or bot ID?")
